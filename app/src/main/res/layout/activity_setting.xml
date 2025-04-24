@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".setting_activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dim_20">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim_10"
+            android:layout_marginTop="@dimen/dim_20"
+            android:layout_marginBottom="@dimen/dim_20"
+            android:backgroundTint="#9D4444"
+            android:fontFamily="@font/opensans"
+            android:text="@string/prompt_setting"
+            android:textColor="@color/Text1"
+            android:textSize="@dimen/sp_28" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:rowCount="4"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/dim_5"
+            android:layout_marginLeft="@dimen/dim_5"
+            android:layout_marginRight="@dimen/dim_5">
+
+            <!-- Reusable card template -->
+            <!-- 1. Update Email -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/menu_update_email"
+                android:layout_width="@dimen/dim_165"
+                android:layout_height="@dimen/dim_165"
+                android:layout_margin="@dimen/dim_10"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="@dimen/dim_12"
+                app:cardElevation="@dimen/dim_5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/cardview_bg"
+                    android:backgroundTint="#3B9B90"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dim_100"
+                        android:layout_height="@dimen/dim_100"
+                        android:layout_marginBottom="@dimen/dim_10"
+                        android:src="@android:drawable/ic_dialog_email"
+                        app:tint="@android:color/black"
+                        tools:ignore="ContentDescription" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans"
+                        android:includeFontPadding="false"
+                        android:text="@string/prompt_change_Email"
+                        android:textColor="@color/Text1"
+                        android:textSize="@dimen/sp_19" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 2. Change Password -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/menu_change_password"
+                android:layout_width="@dimen/dim_165"
+                android:layout_height="@dimen/dim_165"
+                android:layout_margin="@dimen/dim_10"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="@dimen/dim_12"
+                app:cardElevation="@dimen/dim_5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/cardview_bg"
+                    android:backgroundTint="#7747DB"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dim_100"
+                        android:layout_height="@dimen/dim_100"
+                        android:layout_marginBottom="@dimen/dim_10"
+                        app:srcCompat="@drawable/reset_password"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans"
+                        android:includeFontPadding="false"
+                        android:text="@string/prompt_change_password"
+                        android:textColor="@color/Text1"
+                        android:textSize="@dimen/sp_19" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 3. About Us -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAboutUs"
+                android:layout_width="@dimen/dim_165"
+                android:layout_height="@dimen/dim_165"
+                android:layout_margin="@dimen/dim_10"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="@dimen/dim_12"
+                app:cardElevation="@dimen/dim_5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/cardview_bg"
+                    android:backgroundTint="#9B1616"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dim_100"
+                        android:layout_height="@dimen/dim_100"
+                        android:layout_marginBottom="@dimen/dim_10"
+                        app:srcCompat="@drawable/about"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans"
+                        android:text="@string/about"
+                        android:textColor="@color/Text1"
+                        android:textSize="@dimen/sp_19" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 4. Contact Us -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardContact"
+                android:layout_width="@dimen/dim_165"
+                android:layout_height="@dimen/dim_165"
+                android:layout_margin="@dimen/dim_10"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="@dimen/dim_12"
+                app:cardElevation="@dimen/dim_5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/cardview_bg"
+                    android:backgroundTint="#AB5422"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dim_100"
+                        android:layout_height="@dimen/dim_100"
+                        android:layout_marginBottom="@dimen/dim_10"
+                        app:srcCompat="@drawable/contact"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans"
+                        android:text="@string/Contact_Us"
+                        android:textColor="@color/Text1"
+                        android:textSize="@dimen/sp_19" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 5. Delete Profile -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/menu_delete_profile"
+                android:layout_width="@dimen/dim_165"
+                android:layout_height="@dimen/dim_165"
+                android:layout_margin="@dimen/dim_10"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="@dimen/dim_12"
+                app:cardElevation="@dimen/dim_5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/cardview_bg"
+                    android:backgroundTint="#505933"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dim_100"
+                        android:layout_height="@dimen/dim_100"
+                        android:layout_marginBottom="@dimen/dim_10"
+                        app:srcCompat="@drawable/delete_profile_two"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans"
+                        android:text="@string/prompt_delete_profile"
+                        android:textColor="@color/Text1"
+                        android:textSize="@dimen/sp_19" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 6. Update Profile -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/menu_update_profile"
+                android:layout_width="@dimen/dim_165"
+                android:layout_height="@dimen/dim_165"
+                android:layout_margin="@dimen/dim_10"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="@dimen/dim_12"
+                app:cardElevation="@dimen/dim_5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/cardview_bg"
+                    android:backgroundTint="#9B2323"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dim_100"
+                        android:layout_height="@dimen/dim_100"
+                        android:layout_marginBottom="@dimen/dim_10"
+                        app:srcCompat="@drawable/update_profile"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensans"
+                        android:text="@string/prompt_change_profile"
+                        android:textColor="@color/Text1"
+                        android:textSize="@dimen/sp_19" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+    </LinearLayout>
+</ScrollView>

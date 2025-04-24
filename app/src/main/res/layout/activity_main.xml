@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#000000"
+android:backgroundTint="#000000"
+tools:context=".MainActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/dim_16">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/carddonate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dim_10"
+        android:background="#100303"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dim_12"
+        app:cardElevation="@dimen/dim_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B44141"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dim_16">
+
+            <ImageView
+                android:layout_width="@dimen/dim_48"
+                android:layout_height="@dimen/dim_48"
+                app:srcCompat="@drawable/donate"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_16"
+                android:fontFamily="@font/opensans"
+                android:text="@string/donate"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_18" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardReceive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dim_10"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dim_12"
+        app:cardElevation="@dimen/dim_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2C9B39"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dim_16">
+
+            <ImageView
+                android:layout_width="@dimen/dim_48"
+                android:layout_height="@dimen/dim_48"
+                app:srcCompat="@drawable/recieve"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_16"
+                android:fontFamily="@font/opensans"
+                android:text="@string/Receive"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_18" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Card: Food Map -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFoodMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dim_10"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dim_12"
+        app:cardElevation="@dimen/dim_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#7890E9"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dim_16">
+
+            <ImageView
+                android:layout_width="@dimen/dim_48"
+                android:layout_height="@dimen/dim_48"
+                app:srcCompat="@drawable/map"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="@dimen/dim_16"
+                android:fontFamily="@font/opensans"
+                android:text="@string/food_map"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/sp_18"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Card: My Pin -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMyPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dim_10"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dim_12"
+        app:cardElevation="@dimen/dim_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#AA16DB"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dim_16">
+
+            <ImageView
+                android:layout_width="@dimen/dim_48"
+                android:layout_height="@dimen/dim_48"
+                app:srcCompat="@drawable/mypins"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_16"
+                android:fontFamily="@font/opensans"
+                android:text="@string/my_pin"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_18" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Card: History -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dim_10"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dim_12"
+        app:cardElevation="@dimen/dim_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#C75E22"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dim_16">
+
+            <ImageView
+                android:layout_width="@dimen/dim_48"
+                android:layout_height="@dimen/dim_48"
+                app:srcCompat="@drawable/history"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_16"
+                android:fontFamily="@font/opensans"
+                android:text="History"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_18"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Card: Profile -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dim_10"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dim_12"
+        app:cardElevation="@dimen/dim_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#23D9DE"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dim_16">
+
+            <ImageView
+                android:layout_width="@dimen/dim_48"
+                android:layout_height="@dimen/dim_48"
+                app:srcCompat="@drawable/user"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_16"
+                android:fontFamily="@font/opensans"
+                android:text="@string/profile"
+                android:textColor="#546E7A"
+                android:textSize="@dimen/sp_18" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Card: Settings -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dim_10"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dim_12"
+        app:cardElevation="@dimen/dim_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#DE2B40"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dim_16">
+
+            <ImageView
+                android:layout_width="@dimen/dim_48"
+                android:layout_height="@dimen/dim_48"
+                app:srcCompat="@drawable/setting"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_16"
+                android:fontFamily="@font/opensans"
+                android:text="@string/settings"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_18" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Card: Logout -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dim_10"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dim_12"
+        app:cardElevation="@dimen/dim_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#D1A054"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dim_16">
+
+            <ImageView
+                android:layout_width="@dimen/dim_48"
+                android:layout_height="@dimen/dim_48"
+                app:srcCompat="@drawable/lgout"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim_16"
+                android:fontFamily="@font/opensans"
+                android:text="@string/logout"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_18" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
+
+</LinearLayout>
+</ScrollView>

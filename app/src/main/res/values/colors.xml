@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Core Colors -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#5A5A5A</color>
+    <color name="red">#FF0000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Primary Theme Colors -->
+    <color name="colorPrimary">#242C3B</color>
+    <color name="colorPrimaryDark">#242C3B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="bg_color">#242C3B</color>
+
+    <!-- Brand/Highlight Colors -->
+    <color name="light_blue">#37B6E9</color>
+    <color name="blue">#4B4CED</color>
+    <color name="dark_blue">#353F54</color>
+    <color name="blue_black">#222834</color>
+
+    <!-- Gradient Colors -->
+    <color name="cardStartColor">#2C323F</color>
+    <color name="cardEndColor">#21242C</color>
+    <color name="LightBlue_StartColor">#3B5B8F</color>
+    <color name="LightBlue_EndColor">#2B3F75</color>
+
+    <!-- Text Colors -->
+    <color name="Text1">#F5F5F5</color>
+    <color name="Text2">#D3D3D3</color>
+    <color name="Text3">#A7A9AC</color>
+
+    <!-- UI Component Colors -->
+    <color name="button">#262E3D</color>
+    <color name="zircon">#E0E6E4</color>
+
+    <color name="teal_700">#018786</color>
+
+    <!-- Material Override -->
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#FFFFFF</color>
+
+</resources>

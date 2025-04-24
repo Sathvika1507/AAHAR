@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".landing_page">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dim_20">
+
+            <ImageView
+                android:layout_width="@dimen/dim_150"
+                android:layout_height="@dimen/dim_150"
+                android:importantForAccessibility="no"
+                app:srcCompat="@drawable/inapp_logo" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bangers"
+                android:text="@string/landingPageWelcome"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_50" />
+
+            <TextView
+                android:id="@+id/id6_SignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dim_10"
+                android:layout_marginBottom="@dimen/dim_10"
+                android:fontFamily="@font/opensans"
+                android:text="@string/landingText"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_19" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/id7_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_email"
+                app:boxStrokeColor="@color/light_blue"
+                app:hintTextAppearance="@style/HintTextAppearance"
+                app:hintTextColor="@color/hint_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/id7_textUserEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/Text1"
+                    android:textSize="@dimen/sp_16" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/id7_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                app:boxStrokeColor="@color/light_blue"
+                app:hintTextAppearance="@style/HintTextAppearance"
+                app:hintTextColor="@color/hint_color"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/id7_textUserPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/opensans"
+                    android:inputType="textPassword"
+                    android:textColor="@color/Text1"
+                    android:textSize="@dimen/sp_16" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/id8_Forget_password"
+                android:layout_width="@dimen/dim_200"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/dim_10"
+                android:background="@drawable/button_bg4"
+                android:elevation="0dp"
+                android:fontFamily="@font/opensans"
+                android:text="@string/prompt_Forget_password"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_19" />
+
+            <Button
+                android:id="@+id/id9_login"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dim_10"
+                android:elevation="0dp"
+                android:fontFamily="@font/opensans"
+                android:text="@string/login"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_19"
+                app:strokeColor="#fff" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/id10_sign_in"
+                android:layout_width="@dimen/dim_200"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/dim_10"
+                android:background="@drawable/button_bg4"
+                android:elevation="0dp"
+                android:fontFamily="@font/opensans"
+                android:text="@string/New_User_Sign_Up"
+                android:textColor="@color/Text1"
+                android:textSize="@dimen/sp_19" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:elevation="@dimen/dim_10"
+            android:visibility="gone" />
+    </RelativeLayout>
+</ScrollView>

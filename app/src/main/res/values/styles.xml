@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme -->
+    <style name="Theme.Aahar100" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Customize your theme here -->
+        <item name="android:fontFamily">@font/opensans</item>
+        <item name="android:textColorPrimary">@color/Text1</item>
+        <item name="android:textColorSecondary">@color/Text2</item>
+        <item name="android:buttonStyle">@style/Widget.Aahar100.Button</item>
+    </style>
+
+    <!-- Optional: Style for buttons -->
+    <style name="Widget.Aahar100.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/button</item>
+        <item name="android:textColor">@color/Text1</item>
+        <item name="android:fontFamily">@font/opensans</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+</resources>
