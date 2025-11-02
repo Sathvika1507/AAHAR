@@ -4,10 +4,9 @@
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
 
     <!-- Scoped storage permissions (only for legacy storage) -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
@@ -27,50 +26,52 @@
         android:theme="@style/Theme.AAHAR100"
         tools:targetApi="31">
 
-        <!-- Activities -->
-        <activity android:name=".History" android:exported="false"
-            tools:ignore="WrongManifestParent" /> <!-- Changed to false if not accessed externally -->
-
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_api_key" />
-
+        <!-- Main Activities -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name" />
 
         <activity
-            android:name=".DonateActivity"
-            android:exported="true"
-            android:label="@string/title_activity_donate"
-            tools:ignore="WrongManifestParent" />
-
-        <!-- Corrected the name of the activity here -->
-        <activity
-            android:name=".ReceiveActivity"
-            android:exported="true"
-            android:label="@string/title_activity_receive" />
+            android:name=".ScreenTimeActivity"
+            android:exported="false"
+            android:label="@string/screen_time_title"
+            android:parentActivityName=".MainActivity" />
 
         <activity
-            android:name=".FoodMap"
-            android:exported="true"
-            android:label="@string/title_activity_food_map"
-            tools:ignore="Instantiatable" />
+            android:name=".GoalsActivity"
+            android:exported="false"
+            android:label="@string/goals"
+            android:parentActivityName=".MainActivity" />
 
-        <activity android:name=".UserProfileActivity" android:exported="true" />
-        <activity android:name=".UploadProfilePicActivity" android:exported="true" />
-        <activity android:name=".updateProfileActivity" android:exported="true" />
-        <activity android:name=".updateEmailActivity" android:exported="true" />
-        <activity android:name=".setting_activity" android:exported="true" />
-        <activity android:name=".forgotPasswordActivity" android:exported="true" />
-        <activity android:name=".deleteProfileActivity" android:exported="true" />
-        <activity android:name=".changePasswordActivity" android:exported="true" />
-        <activity android:name=".about" android:exported="true" />
+        <activity
+            android:name=".StatisticsActivity"
+            android:exported="false"
+            android:label="@string/statistics"
+            android:parentActivityName=".MainActivity" />
 
+        <!-- Authentication Activities -->
         <activity
             android:name=".sign_up"
             android:exported="true" />
         <activity
             android:name=".landing_page"
             android:exported="true" />
+        <activity
+            android:name=".forgotPasswordActivity"
+            android:exported="true" />
+
+        <!-- Profile Activities -->
+        <activity android:name=".UserProfileActivity" android:exported="true" />
+        <activity android:name=".UploadProfilePicActivity" android:exported="true" />
+        <activity android:name=".updateProfileActivity" android:exported="true" />
+        <activity android:name=".updateEmailActivity" android:exported="true" />
+        <activity android:name=".changePasswordActivity" android:exported="true" />
+        <activity android:name=".deleteProfileActivity" android:exported="true" />
+
+        <!-- Settings & Info Activities -->
+        <activity android:name=".setting_activity" android:exported="true" />
+        <activity android:name=".about" android:exported="true" />
 
         <!-- Splash screen activity (main launcher) -->
         <activity
@@ -81,9 +82,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
     </application>
 </manifest>

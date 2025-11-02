@@ -8,36 +8,66 @@
     <color name="red">#FF0000</color>
     <color name="transparent">#00000000</color>
 
-    <!-- Primary Theme Colors -->
-    <color name="colorPrimary">#242C3B</color>
-    <color name="colorPrimaryDark">#242C3B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="bg_color">#242C3B</color>
+    <!-- DigitalWell Primary Theme Colors -->
+    <color name="colorPrimary">#6366F1</color>
+    <color name="colorPrimaryDark">#4F46E5</color>
+    <color name="colorAccent">#8B5CF6</color>
+    <color name="bg_color">#0F172A</color>
 
-    <!-- Brand/Highlight Colors -->
-    <color name="light_blue">#37B6E9</color>
-    <color name="blue">#4B4CED</color>
-    <color name="dark_blue">#353F54</color>
-    <color name="blue_black">#222834</color>
-
-    <!-- Gradient Colors -->
-    <color name="cardStartColor">#2C323F</color>
-    <color name="cardEndColor">#21242C</color>
-    <color name="LightBlue_StartColor">#3B5B8F</color>
-    <color name="LightBlue_EndColor">#2B3F75</color>
-
+    <!-- Gradient Colors for Professional Look -->
+    <color name="gradient_start">#6366F1</color>
+    <color name="gradient_middle">#8B5CF6</color>
+    <color name="gradient_end">#EC4899</color>
+    
+    <!-- Background Gradients -->
+    <color name="bg_gradient_start">#1E293B</color>
+    <color name="bg_gradient_end">#0F172A</color>
+    
+    <!-- Card Gradients -->
+    <color name="cardStartColor">#334155</color>
+    <color name="cardEndColor">#1E293B</color>
+    
+    <!-- Accent Colors -->
+    <color name="light_blue">#60A5FA</color>
+    <color name="blue">#3B82F6</color>
+    <color name="dark_blue">#1E40AF</color>
+    <color name="purple">#8B5CF6</color>
+    <color name="pink">#EC4899</color>
+    <color name="indigo">#6366F1</color>
+    
+    <!-- Success/Warning/Error Colors -->
+    <color name="success_green">#10B981</color>
+    <color name="warning_yellow">#F59E0B</color>
+    <color name="error_red">#EF4444</color>
+    
     <!-- Text Colors -->
-    <color name="Text1">#F5F5F5</color>
-    <color name="Text2">#D3D3D3</color>
-    <color name="Text3">#A7A9AC</color>
+    <color name="Text1">#F8FAFC</color>
+    <color name="Text2">#E2E8F0</color>
+    <color name="Text3">#94A3B8</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="text_hint">#475569</color>
 
     <!-- UI Component Colors -->
-    <color name="button">#262E3D</color>
-    <color name="zircon">#E0E6E4</color>
+    <color name="button">#6366F1</color>
+    <color name="button_pressed">#4F46E5</color>
+    <color name="card_background">#1E293B</color>
+    <color name="divider">#334155</color>
+    
+    <!-- Chart Colors -->
+    <color name="chart_color_1">#6366F1</color>
+    <color name="chart_color_2">#8B5CF6</color>
+    <color name="chart_color_3">#EC4899</color>
+    <color name="chart_color_4">#F59E0B</color>
+    <color name="chart_color_5">#10B981</color>
 
+    <!-- Legacy Colors (kept for compatibility) -->
+    <color name="zircon">#E0E6E4</color>
     <color name="teal_700">#018786</color>
+    <color name="blue_black">#0F172A</color>
+    <color name="LightBlue_StartColor">#60A5FA</color>
+    <color name="LightBlue_EndColor">#3B82F6</color>
 
     <!-- Material Override -->
-    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#FFFFFF</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#8B5CF6</color>
 
 </resources>
