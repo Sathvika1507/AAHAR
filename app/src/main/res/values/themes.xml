@@ -25,4 +25,9 @@
         <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
+
+    <style name="NumberPickerTheme">
+        <item name="colorControlNormal">@color/Text1</item>
+        <item name="android:textColorPrimary">@color/Text1</item>
+    </style>
 </resources>

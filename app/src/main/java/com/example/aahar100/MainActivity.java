@@ -1,181 +1,208 @@
 package com.example.aahar100;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth authProfile;
-    private ProgressBar progressBar;
     private FirebaseUser firebaseUser;
-    private static final String TAG = "MainActivity";
+    
+    private TextView tvScreenTime;
+    private TextView tvGoalStatus;
+    private TextView tvQuote;
+    private TextView tvQuoteAuthor;
+    private ProgressBar progressCircular;
+    private Button btnViewDetails;
+    private CardView cardGoals;
+    private CardView cardStatistics;
+    private ImageView btnSettings;
+    
+    private ScreenTimeManager screenTimeManager;
+    private QuoteManager quoteManager;
+    private DatabaseReference databaseReference;
+    
+    private long totalScreenTime = 0;
+    private long dailyGoal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        progressBar = findViewById(R.id.progressBar);
+        initializeViews();
+        initializeManagers();
+        checkAuthentication();
+        setupClickListeners();
+        loadData();
+    }
 
-        CardView cardDonate = findViewById(R.id.carddonate);
-        CardView cardReceive = findViewById(R.id.cardReceive);
-        CardView cardFoodMap = findViewById(R.id.cardFoodMap);
-        CardView cardMyPin = findViewById(R.id.cardMyPin);
-        CardView cardHistory = findViewById(R.id.cardHistory);
-        CardView profile = findViewById(R.id.profile);
-        CardView menu_setting = findViewById(R.id.menu_setting);
-        CardView menu_logout = findViewById(R.id.menu_logout);
+    private void initializeViews() {
+        tvScreenTime = findViewById(R.id.tvScreenTime);
+        tvGoalStatus = findViewById(R.id.tvGoalStatus);
+        tvQuote = findViewById(R.id.tvQuote);
+        tvQuoteAuthor = findViewById(R.id.tvQuoteAuthor);
+        progressCircular = findViewById(R.id.progressCircular);
+        btnViewDetails = findViewById(R.id.btnViewDetails);
+        cardGoals = findViewById(R.id.cardGoals);
+        cardStatistics = findViewById(R.id.cardStatistics);
+        btnSettings = findViewById(R.id.btnSettings);
+    }
 
+    private void initializeManagers() {
+        screenTimeManager = new ScreenTimeManager(this);
+        quoteManager = new QuoteManager();
         authProfile = FirebaseAuth.getInstance();
         firebaseUser = authProfile.getCurrentUser();
-
-        if (firebaseUser == null) {
-            Toast.makeText(MainActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
-        } else {
-            checkIfEmailVerified(firebaseUser);
+        
+        if (firebaseUser != null) {
+            databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("Users")
+                    .child(firebaseUser.getUid());
         }
+    }
 
-        profile.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-        });
-
-        menu_setting.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, setting_activity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-        });
-
-        menu_logout.setOnClickListener(view -> {
-            authProfile.signOut();
+    private void checkAuthentication() {
+        if (firebaseUser == null) {
             Intent intent = new Intent(MainActivity.this, landing_page.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
-        });
-
-        cardReceive.setOnClickListener(view -> {
-            progressBar.setVisibility(View.VISIBLE);
-            checkingPinExistOrNotForReceive();
-        });
-
-        cardDonate.setOnClickListener(view -> {
-            progressBar.setVisibility(View.VISIBLE);
-            checkingPinExistOrNotForDonate();
-        });
-
-        cardFoodMap.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, FoodMap.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-        });
-
-        cardHistory.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, History.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-        });
-
-        cardMyPin.setOnClickListener(view -> {
-            progressBar.setVisibility(View.VISIBLE);
-            String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("DonateIdMapping");
-            usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    progressBar.setVisibility(View.GONE);
-                    if (dataSnapshot.exists()) {
-                        String a = dataSnapshot.child("donationId").getValue(String.class);
-                        showAlertDialogToRemoveCurrentPin(a);
-                    } else {
-                        showAlertDialogPinDoesNotExist();
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(MainActivity.this, "Error checking user existence", Toast.LENGTH_LONG).show();
-                }
-            });
-        });
-    }
-
-    private void checkingPinExistOrNotForDonate() {
-        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("DonateIdMapping");
-        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                progressBar.setVisibility(View.GONE);
-                if (dataSnapshot.exists()) {
-                    showAlertDialogThree();
-                } else {
-                    startActivity(new Intent(MainActivity.this, DonateActivity.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(MainActivity.this, "Error checking user existence", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void checkingPinExistOrNotForReceive() {
-        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("DonateIdMapping");
-        usersRef.child(uid);
-        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                progressBar.setVisibility(View.GONE);
-                if (dataSnapshot.exists()) {
-                    showAlertDialogThree();
-                } else {
-                    startActivity(new Intent(MainActivity.this, ReceiveActivity.class));  // Correctly launching the ReceiveActivity
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(MainActivity.this, "Error checking user existence", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void checkIfEmailVerified(FirebaseUser firebaseUser) {
-        if (!firebaseUser.isEmailVerified()) {
-            showAlertDialog();
+        } else if (!firebaseUser.isEmailVerified()) {
+            showEmailVerificationDialog();
         }
     }
 
-    private void showAlertDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+    private void setupClickListeners() {
+        btnViewDetails.setOnClickListener(v -> {
+            if (screenTimeManager.hasUsageStatsPermission()) {
+                Intent intent = new Intent(MainActivity.this, ScreenTimeActivity.class);
+                startActivity(intent);
+            } else {
+                showPermissionDialog();
+            }
+        });
+
+        cardGoals.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, GoalsActivity.class);
+            startActivity(intent);
+        });
+
+        cardStatistics.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
+            startActivity(intent);
+        });
+
+        btnSettings.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, setting_activity.class);
+            startActivity(intent);
+        });
+    }
+
+    private void loadData() {
+        loadMotivationalQuote();
+        loadScreenTimeData();
+    }
+
+    private void loadMotivationalQuote() {
+        Quote quote = quoteManager.getDailyQuote();
+        tvQuote.setText("\"" + quote.getText() + "\"");
+        if (quote.getAuthor() != null && !quote.getAuthor().isEmpty()) {
+            tvQuoteAuthor.setText("- " + quote.getAuthor());
+        } else {
+            tvQuoteAuthor.setVisibility(View.GONE);
+        }
+    }
+
+    private void loadScreenTimeData() {
+        if (!screenTimeManager.hasUsageStatsPermission()) {
+            tvScreenTime.setText("--");
+            tvGoalStatus.setText(R.string.permission_usage_stats_message);
+            progressCircular.setProgress(0);
+            return;
+        }
+
+        new Thread(() -> {
+            List<ScreenTimeData> screenTimeDataList = screenTimeManager.getTodayScreenTime();
+            totalScreenTime = screenTimeManager.getTotalScreenTime(screenTimeDataList);
+            
+            runOnUiThread(() -> {
+                String formattedTime = screenTimeManager.getFormattedTime(totalScreenTime);
+                tvScreenTime.setText(formattedTime);
+                
+                loadGoalData();
+            });
+        }).start();
+    }
+
+    private void loadGoalData() {
+        if (databaseReference == null) return;
+        
+        databaseReference.child("dailyGoal").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult().exists()) {
+                dailyGoal = task.getResult().getValue(Long.class);
+                updateGoalProgress();
+            } else {
+                tvGoalStatus.setText(R.string.no_goal_set);
+                progressCircular.setProgress(0);
+            }
+        });
+    }
+
+    private void updateGoalProgress() {
+        if (dailyGoal > 0) {
+            int progress = (int) ((totalScreenTime * 100) / dailyGoal);
+            progressCircular.setProgress(Math.min(progress, 100));
+            
+            String goalTime = screenTimeManager.getFormattedTime(dailyGoal);
+            if (totalScreenTime <= dailyGoal) {
+                tvGoalStatus.setText(progress + "% of " + goalTime + " goal");
+            } else {
+                tvGoalStatus.setText(getString(R.string.goal_exceeded) + " (" + goalTime + ")");
+            }
+        } else {
+            tvGoalStatus.setText(R.string.no_goal_set);
+            progressCircular.setProgress(0);
+        }
+    }
+
+    private void showPermissionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.permission_usage_stats_title);
+        builder.setMessage(R.string.permission_usage_stats_message);
+        builder.setPositiveButton(R.string.permission_go_to_settings, (dialog, which) -> {
+            screenTimeManager.requestUsageStatsPermission();
+        });
+        builder.setNegativeButton(R.string.permission_cancel, null);
+        
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void showEmailVerificationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Email Not Verified");
-        builder.setMessage("Please verify your email now. If you have already verified your email, close the app and restart.");
+        builder.setMessage("Please verify your email to continue using DigitalWell.");
         builder.setCancelable(false);
         builder.setPositiveButton("Get Verified", (dialog, which) -> {
             Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -183,78 +210,22 @@ public class MainActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });
-
+        
         AlertDialog alertDialog = builder.create();
-        alertDialog.setOnShowListener(dialogInterface -> {
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                    .setTextColor(getResources().getColor(R.color.light_blue));
-            Objects.requireNonNull(alertDialog.getWindow())
-                    .setBackgroundDrawableResource(R.drawable.button_bg1);
-        });
         alertDialog.show();
     }
 
-    private void showAlertDialogToRemoveCurrentPin(String id) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Remove Current Pin");
-        builder.setPositiveButton("Yes", (dialog, which) -> {
-            DatabaseReference refMapping = FirebaseDatabase.getInstance().getReference("DonateIdMapping");
-            DatabaseReference refMap = FirebaseDatabase.getInstance().getReference("FoodMap");
-
-            refMapping.child(firebaseUser.getUid()).removeValue()
-                    .addOnSuccessListener(unused -> Log.d(TAG, "User mapping deleted"))
-                    .addOnFailureListener(e -> Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
-
-            refMap.child(id).removeValue()
-                    .addOnSuccessListener(unused -> Log.d(TAG, "Pin deleted"))
-                    .addOnFailureListener(e -> Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
-
-            Toast.makeText(MainActivity.this, "Your pin is removed", Toast.LENGTH_LONG).show();
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setOnShowListener(dialogInterface -> {
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                    .setTextColor(getResources().getColor(R.color.light_blue));
-            Objects.requireNonNull(alertDialog.getWindow())
-                    .setBackgroundDrawableResource(R.drawable.button_bg1);
-        });
-
-        progressBar.setVisibility(View.GONE);
-        alertDialog.show();
-    }
-
-    private void showAlertDialogThree() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Pin Already Exists");
-        builder.setMessage("To proceed, please remove your existing pin.");
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setOnShowListener(dialogInterface ->
-                Objects.requireNonNull(alertDialog.getWindow())
-                        .setBackgroundDrawableResource(R.drawable.button_bg1));
-        alertDialog.show();
-    }
-
-    private void showAlertDialogPinDoesNotExist() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Pin Does Not Exist");
-        builder.setMessage("Please place a donation pin first to continue.");
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setOnShowListener(dialogInterface ->
-                Objects.requireNonNull(alertDialog.getWindow())
-                        .setBackgroundDrawableResource(R.drawable.button_bg1));
-        alertDialog.show();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadScreenTimeData();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser firebaseUser = authProfile.getCurrentUser();
         if (firebaseUser != null) {
             firebaseUser.reload();
-            if (!firebaseUser.isEmailVerified()) {
-                showAlertDialog();
-            }
         }
     }
 }
